@@ -106,6 +106,7 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                 ApkUpdateModel apkUpdateModel = new ApkUpdateModel();
                 Object url = methodCall.argument("url");
                 Object version = methodCall.argument("version");
+                Object vcode = methodCall.argument("versionCode");
                 Object forceUpdate = methodCall.argument("forceUpdate");
                 Object path = methodCall.argument("path");
                 Object loginId = methodCall.argument("loginId");
@@ -121,6 +122,9 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                     apkUpdateModel.setUrl(url.toString());
                 if (version != null)
                     apkUpdateModel.setVersion(version.toString());
+                if (vcode != null) {
+                    apkUpdateModel.setVersionCode((Integer) vcode);
+                }
                 if (forceUpdate != null)
                     apkUpdateModel.setForceUpdate((int) forceUpdate);
                 if (path != null)
@@ -175,7 +179,7 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                             }
                         });
                     }
-                    ForceUpdateReceiver.registerForceUpdateReceiver(mRegistrar.context(),map.get("packageName").toString() , mForceUpdateReceiver);
+                    ForceUpdateReceiver.registerForceUpdateReceiver(mRegistrar.context(), map.get("packageName").toString(), mForceUpdateReceiver);
                     ApkUpdateService.startDownLoadService(mRegistrar.context(), apkUpdateModel, mLayoutModel);
                 } else {
                     result.success(false);

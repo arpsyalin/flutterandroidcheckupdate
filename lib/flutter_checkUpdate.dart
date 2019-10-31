@@ -16,6 +16,9 @@ class FlutterCheckUpdate {
   ///versionCode或者versionName传入有问题
   static const versionError = 3;
 
+  ///需要下载进度更新的添加
+  static const force = 1;
+
   String get channelName => "com.lyl.flutter_checkupdate";
 
   String get eventName => "com.lyl.flutter_checkupdate.download";
@@ -28,6 +31,7 @@ class FlutterCheckUpdate {
     _eventChannel = EventChannel(eventName);
   }
 
+  ///一天内只会返回一次true
   needAutoCheckUpdate() async {
     if (Platform.isAndroid) {
       var result = await _methodChannel.invokeMethod("needAutoCheckUpdate");
@@ -35,6 +39,7 @@ class FlutterCheckUpdate {
     }
   }
 
+  ///用versionCode去判断是否是需要更新 返回0，1，2，3
   checkVersionCode({versionCode = 0}) async {
     if (Platform.isAndroid) {
       var result = await _methodChannel.invokeMethod(
@@ -43,6 +48,7 @@ class FlutterCheckUpdate {
     }
   }
 
+  ///用versionName去判断是否是需要更新 返回0，1，2，3
   checkUpdate(version) async {
     if (Platform.isAndroid) {
       var result = await _methodChannel
@@ -51,6 +57,7 @@ class FlutterCheckUpdate {
     }
   }
 
+  ///已经下载好最新版本直接去安装
   toInstallApk() async {
     if (Platform.isAndroid) {
       var result =
@@ -59,7 +66,8 @@ class FlutterCheckUpdate {
     }
   }
 
-  toDownloadApk(saveDir, url, version, force,
+  ///去下载apk
+  toDownloadApk(saveDir, url, version, versionCode, force,
       {loginId = 0,
       loginIcon,
       downloadToInstallText,
@@ -96,6 +104,7 @@ class FlutterCheckUpdate {
         'path': saveDir,
         "url": url,
         "version": version,
+        "versionCode": versionCode,
         "forceUpdate": force,
         "layoutId": layoutId,
         "progressId": progressId,
