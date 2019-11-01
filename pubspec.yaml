@@ -1,8 +1,8 @@
 name: flutter_checkupdate
-description: A new Flutter plugin.
+description: 一款flutter 版本更新插件
 version: 0.0.1
-author:
-homepage:
+author: lyl<461973266@qq.com>
+homepage: https://github.com/arpsyalin/flutterandroidcheckupdate
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkupdate/flutter_checkUpdate.dart';
+import 'package:flutter_checkupdate/flutter_checkupdate.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() => runApp(MyApp());

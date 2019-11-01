@@ -1,21 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_checkupdate/flutter_checkUpdate.dart';
+import 'package:flutter_checkupdate/flutter_checkupdate.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('flutter_checkupdate');
 
-  setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
-    });
-  });
-
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    expect(await FlutterCheckupdate.platformVersion, '42');
-  });
 }
