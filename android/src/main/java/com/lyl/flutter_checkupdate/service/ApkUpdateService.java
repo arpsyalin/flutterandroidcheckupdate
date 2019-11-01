@@ -77,7 +77,8 @@ public class ApkUpdateService extends Service {
     private int mNotificationId = 0;
     boolean isFirst = true;
     private String mFileName;
-    Map<String,Object> mAppInfo = new HashMap();
+    Map<String, Object> mAppInfo = new HashMap();
+
     /**
      * 开始运行下载服务
      *
@@ -381,7 +382,7 @@ public class ApkUpdateService extends Service {
     public void sendNotification(int updateCount) {
         Drawable drawable = (Drawable) mAppInfo.get("logo");
         mContentView.setImageViewBitmap(mLayoutModel.getLogoId(), FileUtils.drawableToBitmap(drawable));
-        mContentView.setTextViewText(mLayoutModel.getTitleId(),  mAppInfo.get("appName").toString());
+        mContentView.setTextViewText(mLayoutModel.getTitleId(), mAppInfo.get("appName").toString());
         mContentView.setTextViewText(mLayoutModel.getProgressId(),
                 updateCount + "%");
         mContentView.setProgressBar(mLayoutModel.getPbProgressId(), 100,

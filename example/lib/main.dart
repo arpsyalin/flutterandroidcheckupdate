@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> {
                     if (result == FlutterCheckUpdate.isDownloadInstall) {
                       _checkVersionNameResult =
                           "新版本已经下载可以调用FlutterCheckUpdate().toInstallApk()";
+                      FlutterCheckUpdate().toInstallApk();
                     }
                   });
                 }),
@@ -80,6 +81,7 @@ class _MyAppState extends State<MyApp> {
                   if (result == FlutterCheckUpdate.isDownloadInstall) {
                     _checkVersionCodeResult =
                         "新版本已经下载可以调用FlutterCheckUpdate().toInstallApk()";
+                    FlutterCheckUpdate().toInstallApk();
                   }
                 });
               },
@@ -119,8 +121,7 @@ class _MyAppState extends State<MyApp> {
       BuildContext context, okCallBack, cancelCallBack) async {
     // 申请权限
     if (Theme.of(context).platform == TargetPlatform.android) {
-      await PermissionHandler()
-          .requestPermissions([PermissionGroup.storage]);
+      await PermissionHandler().requestPermissions([PermissionGroup.storage]);
       // 申请结果  权限检测
       PermissionStatus permission = await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.storage);
