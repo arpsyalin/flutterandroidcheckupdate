@@ -35,6 +35,8 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -75,7 +77,7 @@ public class ApkUpdateService extends Service {
     private int mNotificationId = 0;
     boolean isFirst = true;
     private String mFileName;
-
+    Map<String,Object> mAppInfo = new HashMap();
     /**
      * 开始运行下载服务
      *
@@ -100,6 +102,7 @@ public class ApkUpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mDownloadCount = 0;
+        mAppInfo = PhoneFactory.appInfo(this);
         if (intent != null) {
             mApkUpdateModel = (ApkUpdateModel) intent.getSerializableExtra(APKUPDATEMODEL);
             mLayoutModel = (LayoutModel) intent.getSerializableExtra(LAYOUTMODEL);
@@ -108,7 +111,7 @@ public class ApkUpdateService extends Service {
             if (isUpdata == true) {
                 return super.onStartCommand(intent, flags, startId);
             }
-            mFileName = mApkUpdateModel.getAppName();
+            mFileName = mAppInfo.get("appName").toString();
             // 创建文件
             FileUtils.createFile(mApkUpdateModel.getSavePath(), mFileName);
             createNotification();
@@ -185,7 +188,7 @@ public class ApkUpdateService extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public Notification getNotification(String ticker, String contentTitle) {
-        Drawable drawable = (Drawable) PhoneFactory.appInfo(this).get("logo");
+        Drawable drawable = (Drawable) mAppInfo.get("logo");
         return new Notification.Builder(getApplicationContext())
                 .setSmallIcon(Icon.createWithBitmap(FileUtils.drawableToBitmap(drawable)))
                 .setTicker(ticker)
@@ -376,7 +379,7 @@ public class ApkUpdateService extends Service {
      */
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
     public void sendNotification(int updateCount) {
-        Drawable drawable = (Drawable) PhoneFactory.appInfo(this).get("logo");
+        Drawable drawable = (Drawable) mAppInfo.get("logo");
         mContentView.setImageViewBitmap(mLayoutModel.getLogoId(), FileUtils.drawableToBitmap(drawable));
         mContentView.setTextViewText(mLayoutModel.getTitleId(), mApkUpdateModel.getAppName());
         mContentView.setTextViewText(mLayoutModel.getProgressId(),

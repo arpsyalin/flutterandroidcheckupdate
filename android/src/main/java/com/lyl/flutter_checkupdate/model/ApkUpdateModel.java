@@ -5,12 +5,7 @@ import android.text.TextUtils;
 import java.io.Serializable;
 
 public class ApkUpdateModel implements Serializable {
-    String id;
-    String appName;
     String url;
-    String size;
-    String createTime;
-    String description;
     String version;
     int versionCode;
     int forceUpdate;
@@ -20,10 +15,6 @@ public class ApkUpdateModel implements Serializable {
     String downloadToInstallText = "下载完成，点击安装";
     String savePath;
 
-    public String getAppName() {
-        return appName;
-    }
-
     public int getForceUpdate() {
         return forceUpdate;
     }
@@ -32,37 +23,6 @@ public class ApkUpdateModel implements Serializable {
         this.forceUpdate = forceUpdate;
     }
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
 
     public String getUrl() {
         return url;
@@ -81,10 +41,6 @@ public class ApkUpdateModel implements Serializable {
         this.version = version;
     }
 
-    public void setAppName(String appName) {
-        if (!TextUtils.isEmpty(appName))
-            this.appName = appName;
-    }
 
     public String getDownloadErrorText() {
         return downloadErrorText;

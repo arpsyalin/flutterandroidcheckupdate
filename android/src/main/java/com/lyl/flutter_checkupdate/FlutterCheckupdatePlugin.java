@@ -115,8 +115,6 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                 Object startDownloadText = methodCall.argument("startDownloadText");
                 Object downloadToInstallText = methodCall.argument("downloadToInstallText");
                 Map map = PhoneFactory.appInfo(mRegistrar.context());
-                if (map.get("appName") != null)
-                    apkUpdateModel.setAppName(map.get("appName").toString());
                 if (url != null)
                     apkUpdateModel.setUrl(url.toString());
                 if (version != null)
