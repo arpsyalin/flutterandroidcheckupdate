@@ -43,9 +43,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.blue,
                 child: Text("通过VersionName检查是否需要更新"),
                 onPressed: () async {
-                  print("22222");
                   var result = await FlutterCheckUpdate().checkUpdate("1.0.1");
-                  print(result);
                   setState(() {
                     if (result == FlutterCheckUpdate.noUpdate) {
                       _checkVersionNameResult = "没有版本需要更新";
@@ -66,10 +64,8 @@ class _MyAppState extends State<MyApp> {
               color: Colors.blue,
               child: Text("通过VersionCode检查是否需要更新"),
               onPressed: () async {
-                print("111");
                 var result =
                     await FlutterCheckUpdate().checkVersionCode(versionCode: 2);
-                print(result);
                 setState(() {
                   if (result == FlutterCheckUpdate.noUpdate) {
                     _checkVersionCodeResult = "没有版本需要更新";
@@ -91,7 +87,6 @@ class _MyAppState extends State<MyApp> {
               color: Colors.blue,
               child: Text("下载apk带进度，下载的apk需要跟自己apk签名包名相同才能安装成功"),
               onPressed: () {
-                print("333");
                 FlutterCheckUpdate().toDownloadApk("/lyl/checkupdate/",
                     "https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk",
                     force: FlutterCheckUpdate.force,
