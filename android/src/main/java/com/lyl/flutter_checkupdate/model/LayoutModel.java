@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 public class LayoutModel implements Serializable {
     int layoutId = R.layout.notification_item;
+    int logoId = R.id.iv_icon;
     int titleId = R.id.tv_title;
     int progressId = R.id.tv_progress;
     int pbProgressId = R.id.pb_progress;
@@ -43,5 +44,13 @@ public class LayoutModel implements Serializable {
 
     public void setPbProgressId(int pbProgressId) {
         this.pbProgressId = pbProgressId;
+    }
+
+    public int getLogoId() {
+        return logoId;
+    }
+
+    public void setLogoId(int logoId) {
+        this.logoId = logoId;
     }
 }

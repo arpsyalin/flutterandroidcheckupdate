@@ -18,8 +18,6 @@ public class ApkUpdateModel implements Serializable {
     String downloadSuccessText = "下载成功";
     String startDownloadText = "开始下载";
     String downloadToInstallText = "下载完成，点击安装";
-    int logoId;
-    byte[] logoIcon;
     String savePath;
 
     public String getAppName() {
@@ -115,15 +113,6 @@ public class ApkUpdateModel implements Serializable {
             this.startDownloadText = startDownloadText;
     }
 
-    public int getLogoId() {
-        return logoId;
-    }
-
-    public void setLogoId(int logoId) {
-        if (logoId != 0)
-            this.logoId = logoId;
-    }
-
     public String getDownloadToInstallText() {
         return downloadToInstallText;
     }
@@ -131,15 +120,6 @@ public class ApkUpdateModel implements Serializable {
     public void setDownloadToInstallText(String downloadToInstallText) {
         if (!TextUtils.isEmpty(downloadToInstallText))
             this.downloadToInstallText = downloadToInstallText;
-    }
-
-    public byte[] getLogoIcon() {
-        return logoIcon;
-    }
-
-    public void setLogoIcon(byte[] logoIcon) {
-        if (logoIcon != null)
-            this.logoIcon = logoIcon;
     }
 
     public String getSavePath() {

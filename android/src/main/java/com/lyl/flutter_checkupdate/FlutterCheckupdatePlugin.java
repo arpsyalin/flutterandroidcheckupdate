@@ -15,6 +15,7 @@ import com.lyl.flutter_checkupdate.tools.FileUtils;
 import com.lyl.flutter_checkupdate.tools.PhoneFactory;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import io.flutter.plugin.common.EventChannel;
@@ -109,8 +110,6 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                 Object vcode = methodCall.argument("versionCode");
                 Object forceUpdate = methodCall.argument("forceUpdate");
                 Object path = methodCall.argument("path");
-                Object loginId = methodCall.argument("loginId");
-                Object loginIcon = methodCall.argument("loginIcon");
                 Object downloadErrorText = methodCall.argument("downloadErrorText");
                 Object downloadSuccessText = methodCall.argument("downloadSuccessText");
                 Object startDownloadText = methodCall.argument("startDownloadText");
@@ -129,10 +128,6 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                     apkUpdateModel.setForceUpdate((int) forceUpdate);
                 if (path != null)
                     apkUpdateModel.setSavePath(path.toString());
-                if (loginId != null)
-                    apkUpdateModel.setLogoId((int) loginId);
-                if (loginIcon != null)
-                    apkUpdateModel.setLogoIcon(FileUtils.getBytesByBitmap((Bitmap) map.get("logo")));
                 if (downloadErrorText != null)
                     apkUpdateModel.setDownloadErrorText(downloadErrorText.toString());
                 if (downloadSuccessText != null)
@@ -165,17 +160,25 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                         mForceUpdateReceiver.setForceUpdateListener(new ForceUpdateReceiver.ForceUpdateListener() {
                             @Override
                             public void onUpdateStart() {
-                                eventSink[0].success("{'status':0}");
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("status", 0);
+                                eventSink[0].success(map);
                             }
 
                             @Override
                             public void onUpdating(int progress) {
-                                eventSink[0].success("{'status':1,'progress':" + progress + "}");
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("status", 1);
+                                map.put("progress", progress);
+                                eventSink[0].success(map);
                             }
 
                             @Override
                             public void onStop(boolean isSuccess) {
-                                eventSink[0].success("{'status':2,'result':" + isSuccess + "}");
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("status", 2);
+                                map.put("result", isSuccess);
+                                eventSink[0].success(map);
                             }
                         });
                     }

@@ -11,12 +11,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.lyl.flutter_checkupdate.R;
@@ -26,6 +28,7 @@ import com.lyl.flutter_checkupdate.model.LayoutModel;
 import com.lyl.flutter_checkupdate.receiver.AppInstallReceiver;
 import com.lyl.flutter_checkupdate.receiver.ForceUpdateReceiver;
 import com.lyl.flutter_checkupdate.tools.FileUtils;
+import com.lyl.flutter_checkupdate.tools.PhoneFactory;
 
 import java.io.InputStream;
 import java.io.RandomAccessFile;
@@ -61,9 +64,6 @@ public class ApkUpdateService extends Service {
     private static final int DOWN_ERROR = 0;
     private static final int mDownStep = 1;// 提示step
     private AppInstallReceiver mInstallReceiver;
-    //    private String mDownLoadUrl, mAppName, mFileName, mVersionString, mSavePath, mDownloadErrorText, mDownloadSuccessText, mStartDownloadText, mDownloadToInstallText;
-//    private int mLogoId;
-//    private byte[] mLoginIcon;
     ApkUpdateModel mApkUpdateModel;
     LayoutModel mLayoutModel;
     private boolean isFore;
@@ -82,7 +82,7 @@ public class ApkUpdateService extends Service {
      * @param context
      */
     @TargetApi(Build.VERSION_CODES.M)
-    public static void startDownLoadService(Context context, ApkUpdateModel apkBean,LayoutModel layoutModel) {
+    public static void startDownLoadService(Context context, ApkUpdateModel apkBean, LayoutModel layoutModel) {
         Intent intent = new Intent(context, ApkUpdateService.class);
         intent.setAction(ACTIONUPDATE);
         intent.putExtra(APKUPDATEMODEL, apkBean);
@@ -102,17 +102,8 @@ public class ApkUpdateService extends Service {
         mDownloadCount = 0;
         if (intent != null) {
             mApkUpdateModel = (ApkUpdateModel) intent.getSerializableExtra(APKUPDATEMODEL);
+            mLayoutModel = (LayoutModel) intent.getSerializableExtra(LAYOUTMODEL);
             isFore = mApkUpdateModel.getForceUpdate() == 1;
-//            mAppName = intent.getStringExtra(APPNAME);
-//            mDownLoadUrl = intent.getStringExtra(DOWNLOADAPKURL);
-//            mVersionString = intent.getStringExtra(VERSIONSTRING);
-//            mSavePath = intent.getStringExtra(SAVELOCALPATH);
-//            mDownloadErrorText = intent.getStringExtra(DOWNLOADERRORTEXT);
-//            mDownloadSuccessText = intent.getStringExtra(DOWNLOADSUCCESSTEXT);
-//            mStartDownloadText = intent.getStringExtra(STARTDOWNLOADTEXT);
-//            mDownloadToInstallText = intent.getStringExtra(DOWNLOADTOINSTALLTEXT);
-//            mLogoId = intent.getIntExtra(LOGOID, 0);
-//            mLoginIcon = intent.getByteArrayExtra(LOGOICON);
             flags = START_STICKY;
             if (isUpdata == true) {
                 return super.onStartCommand(intent, flags, startId);
@@ -163,7 +154,7 @@ public class ApkUpdateService extends Service {
                     });
                     registerReceiver(mInstallReceiver, filter);
                     String urlpath = FileUtils.updataFilename(mApkUpdateModel.getSavePath(), mFileName);
-                    CacheOptFactory.saveDownloadUpdateData(getApplicationContext(), mApkUpdateModel.getVersion(),mApkUpdateModel.getVersionCode(), urlpath);
+                    CacheOptFactory.saveDownloadUpdateData(getApplicationContext(), mApkUpdateModel.getVersion(), mApkUpdateModel.getVersionCode(), urlpath);
                     if (isFore) {
                         ForceUpdateReceiver.sendStop(getApplicationContext(), true);
                     }
@@ -194,24 +185,15 @@ public class ApkUpdateService extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public Notification getNotification(String ticker, String contentTitle) {
-        if (mApkUpdateModel.getLogoId() == 0) {
-            Bitmap bitmap = FileUtils.getPicFromBytes(mApkUpdateModel.getLogoIcon(), new BitmapFactory.Options());
-            return new Notification.Builder(getApplicationContext())
-                    .setSmallIcon(Icon.createWithBitmap(bitmap))
-                    .setTicker(ticker)
-                    .setContentTitle(contentTitle)
-                    .setAutoCancel(true)
-                    .setContentIntent(null)
-                    .build();
-        } else {
-            return new Notification.Builder(getApplicationContext())
-                    .setSmallIcon(mApkUpdateModel.getLogoId())
-                    .setTicker(ticker)
-                    .setContentTitle(contentTitle)
-                    .setAutoCancel(true)
-                    .setContentIntent(null)
-                    .build();
-        }
+        Drawable drawable = (Drawable) PhoneFactory.appInfo(this).get("logo");
+        return new Notification.Builder(getApplicationContext())
+                .setSmallIcon(Icon.createWithBitmap(FileUtils.drawableToBitmap(drawable)))
+                .setTicker(ticker)
+                .setContentTitle(contentTitle)
+                .setAutoCancel(true)
+                .setContentIntent(null)
+                .build();
+
     }
 
     /**
@@ -224,23 +206,6 @@ public class ApkUpdateService extends Service {
         mPendingIntent = PendingIntent.getActivity(
                 ApkUpdateService.this, 0, intent, 0);
         mNotification = getNotification(mApkUpdateModel.getDownloadSuccessText(), mApkUpdateModel.getDownloadToInstallText());
-//        if (mLogoId == 0) {
-//            mNotification = new NotificationCompat.Builder(getApplicationContext(), "defalut")
-//                    .setSmallIcon(mLogoId)
-//                    .setTicker(mDownloadSuccessText)
-//                    .setAutoCancel(true)
-//                    .setContentTitle(getString(R.string.download_sussce_toclick))
-//                    .setContentIntent(mPendingIntent)
-//                    .getNotification();
-//        } else {
-//            mNotification = new NotificationCompat.Builder(getApplicationContext(), "defalut")
-//                    .setSmallIcon(mLoginIcon)
-//                    .setTicker(mDownloadSuccessText)
-//                    .setAutoCancel(true)
-//                    .setContentTitle(getString(R.string.download_sussce_toclick))
-//                    .setContentIntent(mPendingIntent)
-//                    .getNotification();
-//        }
         mNotification.flags = Notification.FLAG_AUTO_CANCEL;
         mNotificationManager.notify(mNotificationId, mNotification);
     }
@@ -409,7 +374,10 @@ public class ApkUpdateService extends Service {
      *
      * @param updateCount
      */
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     public void sendNotification(int updateCount) {
+        Drawable drawable = (Drawable) PhoneFactory.appInfo(this).get("logo");
+        mContentView.setImageViewBitmap(mLayoutModel.getLogoId(), FileUtils.drawableToBitmap(drawable));
         mContentView.setTextViewText(mLayoutModel.getTitleId(), mApkUpdateModel.getAppName());
         mContentView.setTextViewText(mLayoutModel.getProgressId(),
                 updateCount + "%");

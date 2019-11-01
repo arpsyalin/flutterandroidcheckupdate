@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FlutterCheckUpdate {
@@ -37,6 +38,7 @@ class FlutterCheckUpdate {
       var result = await _methodChannel.invokeMethod("needAutoCheckUpdate");
       return result;
     }
+    return false;
   }
 
   ///用versionCode去判断是否是需要更新 返回0，1，2，3
@@ -46,6 +48,7 @@ class FlutterCheckUpdate {
           "checkVersionCode", <String, dynamic>{"versionCode": versionCode});
       return result;
     }
+    return false;
   }
 
   ///用versionName去判断是否是需要更新 返回0，1，2，3
@@ -55,6 +58,7 @@ class FlutterCheckUpdate {
           .invokeMethod("checkUpdate", <String, dynamic>{"version": version});
       return result;
     }
+    return false;
   }
 
   ///已经下载好最新版本直接去安装
@@ -64,12 +68,16 @@ class FlutterCheckUpdate {
           await _methodChannel.invokeMethod("toInstall", <String, dynamic>{});
       return result;
     }
+    return false;
   }
 
-  ///去下载apk
-  toDownloadApk(saveDir, url, version, versionCode, force,
+  ///去下载apk 需要进度force请设置为1
+  toDownloadApk(saveDir, url,
       {loginId = 0,
       loginIcon,
+      force = 0,
+      version,
+      versionCode = 1,
       downloadToInstallText,
       startDownloadText,
       downloadSuccessText,
@@ -78,16 +86,17 @@ class FlutterCheckUpdate {
       progressId,
       titleId,
       layoutId,
-      startCallback,
-      progressCallback,
-      endCallback}) async {
+      VoidCallback startCallback,
+      ValueChanged progressCallback,
+      ValueChanged endCallback}) async {
     if (Platform.isAndroid) {
       _eventChannel.receiveBroadcastStream().listen((event) {
+        print(event);
         if (event["status"] == 0) {
           if (startCallback != null) startCallback();
         }
         if (event["status"] == 1) {
-          if (progressCallback != null) progressCallback(event["count"]);
+          if (progressCallback != null) progressCallback(event["progress"]);
         }
         if (event["status"] == 2) {
           if (endCallback != null) endCallback(event["result"]);
@@ -113,5 +122,6 @@ class FlutterCheckUpdate {
       });
       return result;
     }
+    return false;
   }
 }
