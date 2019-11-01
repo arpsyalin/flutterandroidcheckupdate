@@ -44,9 +44,11 @@ packages:
   flutter_checkupdate:
     dependency: "direct dev"
     description:
-      path: ".."
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: d4c913f25aafd86de5f4171f2caf018d51071577
+      url: "https://github.com/arpsyalin/flutterandroidcheckupdate"
+    source: git
     version: "0.0.1"
   flutter_test:
     dependency: "direct dev"

@@ -139,6 +139,8 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                 Object titleId = methodCall.argument("titleId");
                 Object progressId = methodCall.argument("progressId");
                 Object pbProgressId = methodCall.argument("pbProgressId");
+                Object logoId = methodCall.argument("logoId");
+
                 if (layoutId != null) {
                     mLayoutModel.setLayoutId((Integer) layoutId);
                 }
@@ -151,7 +153,9 @@ public class FlutterCheckupdatePlugin implements MethodCallHandler {
                 if (pbProgressId != null) {
                     mLayoutModel.setPbProgressId((Integer) pbProgressId);
                 }
-
+                if (logoId != null) {
+                    mLayoutModel.setLogoId((Integer) logoId);
+                }
                 if (apkUpdateModel.getUrl().indexOf(".apk") > -1) {
                     ForceUpdateReceiver mForceUpdateReceiver = new ForceUpdateReceiver();
                     if (apkUpdateModel.getForceUpdate() == 1) {

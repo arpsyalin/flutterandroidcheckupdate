@@ -86,6 +86,7 @@ class FlutterCheckUpdate {
       progressId,
       titleId,
       layoutId,
+      logoId,
       VoidCallback startCallback,
       ValueChanged progressCallback,
       ValueChanged endCallback}) async {
@@ -116,6 +117,7 @@ class FlutterCheckUpdate {
         "versionCode": versionCode,
         "forceUpdate": force,
         "layoutId": layoutId,
+        "logoId": logoId,
         "progressId": progressId,
         "titleId": titleId,
         "pbProgressId": pbProgressId

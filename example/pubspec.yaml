@@ -19,7 +19,9 @@ dev_dependencies:
     sdk: flutter
 
   flutter_checkupdate:
-    path: ../
+    git:
+      url: https://github.com/arpsyalin/flutterandroidcheckupdate
+#    path: ../
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
