@@ -381,7 +381,7 @@ public class ApkUpdateService extends Service {
     public void sendNotification(int updateCount) {
         Drawable drawable = (Drawable) mAppInfo.get("logo");
         mContentView.setImageViewBitmap(mLayoutModel.getLogoId(), FileUtils.drawableToBitmap(drawable));
-        mContentView.setTextViewText(mLayoutModel.getTitleId(), mApkUpdateModel.getAppName());
+        mContentView.setTextViewText(mLayoutModel.getTitleId(),  mAppInfo.get("appName").toString());
         mContentView.setTextViewText(mLayoutModel.getProgressId(),
                 updateCount + "%");
         mContentView.setProgressBar(mLayoutModel.getPbProgressId(), 100,

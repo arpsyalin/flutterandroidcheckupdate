@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47643d5d-489c-4de1-a62b-c36b90492ef0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/FlutterCheckupdatePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/FlutterCheckupdatePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/model/ApkUpdateModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/model/ApkUpdateModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -59,7 +57,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dart" value="1384" />
-          <entry key="java" value="210" />
+          <entry key="java" value="211" />
           <entry key="xml" value="6" />
           <entry key="yaml" value="1" />
         </counts>
@@ -67,7 +65,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dart" value="1384" />
-          <entry key="JAVA" value="210" />
+          <entry key="JAVA" value="211" />
           <entry key="XML" value="6" />
           <entry key="YAML" value="1" />
         </counts>
@@ -85,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/FlutterCheckupdatePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
+            <state relative-caret-position="299">
+              <caret line="50" column="72" lean-forward="true" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+            <state relative-caret-position="135">
+              <caret line="385" column="35" lean-forward="true" selection-start-line="385" selection-start-column="35" selection-end-line="385" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5753#8383#0" expanded="true" />
@@ -191,6 +189,7 @@
       <find>vcode</find>
       <find>createWithBitmap</find>
       <find>setSmallIcon</find>
+      <find>mApkUpdateModel.getAppName()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,9 +204,9 @@
         <option value="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/lib/flutter_checkUpdate.dart" />
         <option value="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/model/LayoutModel.java" />
-        <option value="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java" />
         <option value="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/model/ApkUpdateModel.java" />
         <option value="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/FlutterCheckupdatePlugin.java" />
+        <option value="$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java" />
       </list>
     </option>
   </component>
@@ -532,20 +531,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5753#8383#0" expanded="true" />
-            <element signature="e#6433#6715#0" expanded="true" />
-            <element signature="e#6714#6715#0" expanded="true" />
-            <element signature="e#8382#8383#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/model/ApkUpdateModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -555,10 +540,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/FlutterCheckupdatePlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
+        <state relative-caret-position="299">
+          <caret line="50" column="72" lean-forward="true" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/com/lyl/flutter_checkupdate/service/ApkUpdateService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="385" column="35" lean-forward="true" selection-start-line="385" selection-start-column="35" selection-end-line="385" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5753#8383#0" expanded="true" />
+            <element signature="e#6433#6715#0" expanded="true" />
+            <element signature="e#6714#6715#0" expanded="true" />
+            <element signature="e#8382#8383#0" expanded="true" />
           </folding>
         </state>
       </provider>
