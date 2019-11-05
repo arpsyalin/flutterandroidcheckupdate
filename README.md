@@ -1,4 +1,8 @@
 # flutter_checkupdate
+可以使用以下方式引用
+  flutter_checkupdate:
+    git:
+      url: https://github.com/arpsyalin/flutterandroidcheckupdate
 
 一款flutter更新的插件，只有Android端因为ios审核不允许包含版本更新不支持ios
 
